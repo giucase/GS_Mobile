@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const destino = document.getElementById('destino').value;
         const data = document.getElementById('data').value;
-        const voluntarios = document.getElementById('voluntarios').value;
+        const embarcacoes = document.getElementById('embarcacoes').value;
         const descricao = document.getElementById('descricao').value;
 
-        const viagem = { destino, data, voluntarios, descricao };
+        const viagem = { destino, data, embarcacoes, descricao };
         saveViagem(viagem);
         cadastroForm.reset();
     });
@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input', renderViagens);
 
     function showSection(sectionId) {
-        cadastroSection.classList.remove('active');
-        consultaSection.classList.remove('active');
-        relatorioSection.classList.remove('active');
+        cadastroSection.classList.add('hidden');
+        consultaSection.classList.add('hidden');
+        relatorioSection.classList.add('hidden');
 
-        document.getElementById(sectionId).classList.add('active');
+        document.getElementById(sectionId).classList.remove('hidden');
     }
 
     function saveViagem(viagem) {
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         viagens.filter(viagem => viagem.destino.toLowerCase().includes(searchTerm)).forEach((viagem, index) => {
             const li = document.createElement('li');
-            li.textContent = `${viagem.destino} - ${viagem.data} - ${viagem.voluntarios} voluntários`;
+            li.textContent = `${viagem.destino} - ${viagem.data} - ${viagem.embarcacoes} embarcações`;
             const button = document.createElement('button');
             button.textContent = 'Excluir';
             button.addEventListener('click', () => {
@@ -79,12 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateRelatorio() {
         const viagens = JSON.parse(localStorage.getItem('viagens')) || [];
-        const totalVoluntarios = viagens.reduce((total, viagem) => total + parseInt(viagem.voluntarios), 0);
+        const totalEmbarcacoes = viagens.reduce((total, viagem) => total + parseInt(viagem.embarcacoes), 0);
         relatorioContent.innerHTML = `
             <p>Total de Viagens: ${viagens.length}</p>
-            <p>Total de Voluntários: ${totalVoluntarios}</p>
+            <p>Total de Embarcações: ${totalEmbarcacoes}</p>
         `;
     }
-
+    
     showSection('cadastro');  // Show cadastro section by default
 });

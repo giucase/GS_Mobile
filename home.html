@@ -8,7 +8,6 @@
     <script src="dados.js" defer></script>
 </head>
 <body>
-    <header >
     <header>
         <h1>Cadastro de Viagens para Limpeza dos Oceanos</h1>
         <nav>
@@ -19,7 +18,6 @@
             </ul>
         </nav>
     </header>
-    <img src="imagem/logo gs.jpg" alt="Overlay Image" class="overlay-image">
     <main>
         <section id="cadastro" class="active">
             <h2>Cadastro de Viagem</h2>
@@ -30,8 +28,8 @@
                 <label for="data">Data:</label>
                 <input type="date" id="data" name="data" required>
 
-                <label for="voluntarios">Número de Voluntários:</label>
-                <input type="number" id="voluntarios" name="voluntarios" required min="1">
+                <label for="embarcacoes">Número de Embarcações:</label>
+                <input type="number" id="embarcacoes" name="embarcacoes" required min="1">
 
                 <label for="descricao">Descrição:</label>
                 <textarea id="descricao" name="descricao" required></textarea>
@@ -39,12 +37,12 @@
                 <button type="submit">Cadastrar</button>
             </form>
         </section>
-        <section id="consulta">
+        <section id="consulta" class="hidden">
             <h2>Consulta de Viagens</h2>
             <input type="text" id="search" placeholder="Buscar por destino...">
             <ul id="listaViagens"></ul>
         </section>
-        <section id="relatorio">
+        <section id="relatorio" class="hidden">
             <h2>Relatório</h2>
             <div id="relatorioContent"></div>
         </section>

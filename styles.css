@@ -2,102 +2,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 body {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
     margin: 0;
-    padding: 0;
-    background-color: #76bcce;
-}
-
-
-header {
-    background-image: url("https://img.odcdn.com.br/wp-content/uploads/2023/07/fundo-do-oceano.jpg");
-    color: white; 
+    font-family: Arial, sans-serif;
+    background: url('imagem/20230703_00_oceano_mar.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
-    width: 100vw;
-    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
     text-align: center;
-    align-items: center;  
 }
 
-overlay-image {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background-image: url('imagem/logo\ gs.jpg'); /* Imagem de fundo */
+header {
     position: absolute;
-    top: 50px; /* Ajuste a posição conforme necessário */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px; /* Ajuste o tamanho conforme necessário */
-    height: auto; /* Mantém a proporção da imagem */
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul li {
-    margin: 0 1rem;
-    color: white;
-    padding: 1rem;
-    display: inline-block; 
-    align-items: center; 
-    
+    margin: 0 15px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    align-items: center; 
-    
+}
+
+.overlay-image {
+    width: 100px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 main {
-    padding: 8rem;
-    align-items: center; 
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
 }
 
-section {
-    display: none;
-    height: 100vh;
-    width: 75vw;
+h1 {
+    font-size: 24px;
 }
-
-section.active {
-    display: block;
-}
-
 
 form {
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
 }
 
-form label {
-    margin-top: 1rem;
-    text-align: center; 
-    display: block; 
-    width: 100vw; 
-    align-items: center; 
+label, input, textarea, button {
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-form input, form textarea, form button {
-    margin-top: 0.5rem;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+input, textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
 }
 
-form button {
-    background-color: #4CAF50;
+button {
+    padding: 10px;
+    background: green;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 1rem;
 }
 
-form button:hover {
-    background-color: #45a049;
+button:hover {
+    background: darkgreen;
+}
+
+#search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 #listaViagens {
@@ -106,21 +101,31 @@ form button:hover {
 }
 
 #listaViagens li {
-    background-color: #e7e7e7;
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 #listaViagens button {
-    background-color: #f44336;
-    color: white;
+    background: red;
     border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 #listaViagens button:hover {
-    background-color: #e41e1e;
+    background: darkred;
+}
+
+/* Hide sections by default */
+.hidden {
+    display: none;
+}
+
+/* Show sections when active */
+.active {
+    display: block;
 }
