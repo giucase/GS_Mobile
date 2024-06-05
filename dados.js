@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const listaViagens = document.getElementById('listaViagens');
     const searchInput = document.getElementById('search');
     const relatorioContent = document.getElementById('relatorioContent');
+    const destinoInput = document.getElementById('destino');
+    const destinoError = document.getElementById('destinoError');
+    const dataInput = document.getElementById('data');
+    const dataRetornoInput = document.getElementById('dataRetorno');
 
     linkCadastro.addEventListener('click', () => {
         showSection('cadastro');
@@ -24,16 +28,39 @@ document.addEventListener('DOMContentLoaded', () => {
         generateRelatorio();
     });
 
+    dataInput.addEventListener('change', () => {
+        const data = new Date(dataInput.value);
+        const dataRetorno = new Date(data);
+        dataRetorno.setDate(dataRetorno.getDate() + 5);
+        dataRetornoInput.value = formatDate(dataRetorno);
+    });
+
     cadastroForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const destino = document.getElementById('destino').value;
-        const data = document.getElementById('data').value;
+        const destino = destinoInput.value;
+        const data = dataInput.value;
+        const dataRetorno = dataRetornoInput.value;
         const embarcacoes = document.getElementById('embarcacoes').value;
         const descricao = document.getElementById('descricao').value;
 
-        const viagem = { destino, data, embarcacoes, descricao };
+        if (!isValidDestino(destino)) {
+            destinoError.textContent = 'Não é permitido caracteres numéricos e especiais no campo destino.';
+            return;
+        }
+
+        const viagem = { destino, data, dataRetorno, embarcacoes, descricao };
         saveViagem(viagem);
         cadastroForm.reset();
+        dataRetornoInput.value = '';
+    });
+
+    destinoInput.addEventListener('input', () => {
+        const destino = destinoInput.value;
+        if (!isValidDestino(destino)) {
+            destinoError.textContent = 'Não é permitido caracteres numéricos e especiais no campo destino.';
+        } else {
+            destinoError.textContent = '';
+        }
     });
 
     searchInput.addEventListener('input', renderViagens);
@@ -59,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         viagens.filter(viagem => viagem.destino.toLowerCase().includes(searchTerm)).forEach((viagem, index) => {
             const li = document.createElement('li');
-            li.textContent = `${viagem.destino} - ${viagem.data} - ${viagem.embarcacoes} embarcações`;
+            li.textContent = `${viagem.destino} - ${formatDate(new Date(viagem.data))} - ${viagem.embarcacoes} embarcações - Retorno: ${formatDate(new Date(viagem.dataRetorno))}`;
             const button = document.createElement('button');
             button.textContent = 'Excluir';
             button.addEventListener('click', () => {
@@ -79,12 +106,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateRelatorio() {
         const viagens = JSON.parse(localStorage.getItem('viagens')) || [];
-        const totalEmbarcacoes = viagens.reduce((total, viagem) => total + parseInt(viagem.embarcacoes), 0);
+        const totalEmbarcacoes = viagens.reduce((total, viagem) => total + 1, 0);
         relatorioContent.innerHTML = `
             <p>Total de Viagens: ${viagens.length}</p>
             <p>Total de Embarcações: ${totalEmbarcacoes}</p>
         `;
     }
-    
-    showSection('cadastro');  // Show cadastro section by default
+
+    function isValidDestino(destino) {
+        const regex = /^[a-zA-Z\s]*$/;
+        return regex.test(destino);
+    }
+
+    function formatDate(date) {
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    }
+
+    showSection('cadastro');
 });
+

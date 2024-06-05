@@ -24,15 +24,31 @@
             <form id="cadastroForm">
                 <label for="destino">Destino:</label>
                 <input type="text" id="destino" name="destino" required>
+                <span id="destinoError" style="color: red;"></span>
 
                 <label for="data">Data:</label>
                 <input type="date" id="data" name="data" required>
 
+                <label for="dataRetorno">Data de Retorno:</label>
+                <input type="text" id="dataRetorno" name="dataRetorno" readonly>
+
                 <label for="embarcacoes">Número de Embarcações:</label>
-                <input type="number" id="embarcacoes" name="embarcacoes" required min="1">
+                <select id="embarcacoes" name="embarcacoes" required>
+                    <option value="ERM-01">ERM-01</option>
+                    <option value="ERM-02">ERM-02</option>
+                    <option value="ERM-03">ERM-03</option>
+                    <option value="ERM-04">ERM-04</option>
+                    <option value="ERM-05">ERM-05</option>
+                    <option value="ERM-06">ERM-06</option>
+                    <option value="ERM-07">ERM-07</option>
+                    <option value="ERM-08">ERM-08</option>
+                    <option value="ERM-09">ERM-09</option>
+                </select>
 
                 <label for="descricao">Descrição:</label>
                 <textarea id="descricao" name="descricao" required></textarea>
+
+               
 
                 <button type="submit">Cadastrar</button>
             </form>
@@ -47,6 +63,10 @@
             <div id="relatorioContent"></div>
         </section>
     </main>
+    <footer>
+        <p>Criadores: Giulia Casé Ribeiro (RM94360) Marcelo Kutudjian Filho (RM93124)</p>
+        <p>Site criado para os cientistas para que possam acompanhar as viagens das embarcações que estão destinas a coleta de microplásticos nos Oceanos.</p>
+    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>
